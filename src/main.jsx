@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
-import SiparisSistemiUI from './SiparisSistemiUI'
-import Login from './Login'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+
+import Login from "./Login";
+import SiparisSistemiUI from "./SiparisSistemiUI";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 function App() {
-  const [kullanici, setKullanici] = useState(null)
-  return (
-    <React.StrictMode>
-      {kullanici ? <SiparisSistemiUI kullanici={kullanici} /> : <Login onLogin={(k) => setKullanici(k)} />}
-    </React.StrictMode>
-  )
+  const [kullanici, setKullanici] = React.useState(null);
+
+  if (!kullanici) {
+    return <Login onLogin={setKullanici} />;
+  }
+
+  return <SiparisSistemiUI kullanici={kullanici} />;
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+root.render(<App />);
